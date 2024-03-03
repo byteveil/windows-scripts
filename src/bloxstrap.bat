@@ -23,20 +23,18 @@ if %errorlevel% neq 0 (
     call :installWinget
 )
 
-REM Check if Discord is installed
-:checkDiscord
-winget show Discord >nul 2>&1
+REM Check if Bloxstrap is installed
+:checkBloxstrap
+winget show pizzaboxer.Bloxstrap >nul 2>&1
 if %errorlevel% neq 0 (
-    echo Discord is not installed. Installing...
-    winget install Discord -e
-    if %errorlevel% neq 0 (
-        echo Failed to install Discord. Exiting...
-        exit /b 1
-    )
-    echo Discord has been installed successfully.
+    echo Bloxstrap is not installed.
+    goto :EOF
 )
 
-echo Running Discord...
-start "" "%LOCALAPPDATA%\Discord\Update.exe" --processStart Discord.exe
+REM Specify the path to Bloxstrap executable
+set "bloxstrapPath=%LOCALAPPDATA%\Bloxstrap\Bloxstrap.exe"
+
+REM Run Bloxstrap with the specified command
+start "" "%bloxstrapPath%" -menu
 
 :end
